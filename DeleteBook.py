@@ -11,7 +11,6 @@ con = pymysql.connect(host="localhost",user="root",password="",database=mydataba
 cur = con.cursor()
 
 # Enter Table Names here
-issueTable = "rental" 
 bookTable = "books" #Book Table
 
 
@@ -20,12 +19,10 @@ def deleteBook():
     bid = bookInfo1.get()
     
     deleteSql = "delete from "+bookTable+" where bid = '"+bid+"'"
-    deleteIssue = "delete from "+issueTable+" where bid = '"+bid+"'"
     try:
         cur.execute(deleteSql)
         con.commit()
-        cur.execute(deleteIssue)
-        con.commit()
+    
         messagebox.showinfo('Success',"Book Record Deleted Successfully")
     except:
         messagebox.showinfo("Please check Book ID")
@@ -33,12 +30,12 @@ def deleteBook():
 
     print(bid)
 
-    bookInfo1.delete(0, END)
+    bookInfo1.delete(0,END)
     root.destroy()
     
 def delete(): 
     
-    global bookInfo1,bookInfo2,bookInfo3,bookInfo4,Canvas1,con,cur,bookTable,root
+    global bookInfo1,Canvas1,con,cur,bookTable,root
     
     root = Tk()
     root.title("Library")
