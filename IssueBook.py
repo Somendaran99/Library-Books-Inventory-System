@@ -18,16 +18,21 @@ allbid = []
 
 def issue():
     
-    global issueBtn,labelFrame,lb1,inf1,inf2,quitBtn,root,Canvas1,status
+    global issueBtn,labelFrame,lb1,inf1,inf2,inf3,inf4,quitBtn,root,Canvas1,status
     
     bid = inf1.get()
     name = inf2.get()
+    time=inf3.get()
+    date=inf4.get()
+
 
     issueBtn.destroy()
     labelFrame.destroy()
     lb1.destroy()
     inf1.destroy()
     inf2.destroy()
+    inf3.destroy()
+    inf4.destroy()
     
     
     extractbid = "select bid from "+bookTable
@@ -54,7 +59,7 @@ def issue():
     except:
         messagebox.showinfo("Error","Can't fetch Book IDs")
     
-    issueSql = "insert into "+issueTable+" values ('"+bid+"','"+name+"')"
+    issueSql = "insert into "+issueTable+" values ('"+bid+"','"+name+"','"+time+"','"+date+"')"
     show = "select * from "+issueTable
     
     updateStatus = "update "+bookTable+" set status = 'issued' where bid = '"+bid+"'"
@@ -81,7 +86,7 @@ def issue():
     
 def issueBook(): 
     
-    global issueBtn,labelFrame,lb1,inf1,inf2,quitBtn,root,Canvas1,status
+    global issueBtn,labelFrame,lb1,inf1,inf2,inf3,inf4,quitBtn,root,Canvas1,status
     
     root = Tk()
     root.title("Library")
@@ -114,6 +119,20 @@ def issueBook():
         
     inf2 = Entry(labelFrame)
     inf2.place(relx=0.3,rely=0.4, relwidth=0.62)
+
+     # time
+    lb3= Label(labelFrame,text="Time : ", bg='black', fg='white')
+    lb3.place(relx=0.05,rely=0.6)
+        
+    inf3 = Entry(labelFrame)
+    inf3.place(relx=0.3,rely=0.6, relwidth=0.62)
+
+    # date
+    lb4 = Label(labelFrame,text="Date : ", bg='black', fg='white')
+    lb4.place(relx=0.05,rely=0.8)
+        
+    inf4 = Entry(labelFrame)
+    inf4.place(relx=0.3,rely=0.8, relwidth=0.62)
 
     #Issue Button
     issueBtn = Button(root,text="Issue Book",bg='#ffffff', fg='black',bd=0,command=issue)
